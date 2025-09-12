@@ -116,14 +116,13 @@ Please make adjustments to your application that you believe will improve the vi
 
 #### 🏗️ Activity #1
 ##### Adjustments Made:
-- _describe adjustment(s) here_
+- Added AI Assitant chatbot to refine test cases 
 
 ##### Results:
-1. _Comment here how the change(s) impacted the vibe check of your system_
-2. 
-3. 
-4. 
-5.
+1. User can refine the test cases provided using the AI assistant chatbot
+Structured markdown formatting - All chatbot responses now use proper markdown with headings, bullet points, and organized sections
+2. Post-processing logic - Automatic formatting enhancement when the LLM doesn't follow markdown structure perfectly
+3. Context-aware refinement - The chatbot can analyze uploaded PRD documents and provide specific suggestions for improving test cases
 
 
 ## Submitting Your Homework
