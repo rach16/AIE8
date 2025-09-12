@@ -1,13 +1,11 @@
-<div align="center">
-  <img src="https://github.com/AI-Maker-Space/LLM-Dev-101/assets/37101144/d1343317-fa2f-41e1-8af1-1dbb18399719" 
-       width="200px"
-       height="auto"
-       alt="AIE8 Logo"/>
-</div>
+<p align = "center" draggable=”false” ><img src="https://github.com/AI-Maker-Space/LLM-Dev-101/assets/37101144/d1343317-fa2f-41e1-8af1-1dbb18399719" 
+     width="200px"
+     height="auto"/>
+</p>
 
-# Session 1: Introduction and Vibe Check
+<h1 align="center" id="heading">Session 1: Introduction and Vibe Check</h1>
 
-## 📚 Quicklinks
+### [Quicklinks](https://github.com/AI-Maker-Space/AIE8/tree/main/00_AIM_Quicklinks)
 
 [View all quicklinks](https://github.com/AI-Maker-Space/AIE8/tree/main/00_AIM_Quicklinks)
 
@@ -26,22 +24,22 @@
 
 Each assignment will have a few of the following categories of exercises:
 
-- **❓ Questions** – These will be questions that you will be expected to gather the answer to! These can appear as general questions, or questions meant to spark a discussion in your breakout rooms!
+- ❓ **Questions** – these will be questions that you will be expected to gather the answer to! These can appear as general questions, or questions meant to spark a discussion in your breakout rooms!
 
-- **🏗️ Activities** – These will be work or coding activities meant to reinforce specific concepts or theory components.
+- 🏗️ **Activities** – these will be work or coding activities meant to reinforce specific concepts or theory components.
 
-- **🚧 Advanced Builds (optional)** – Take on a challenge! These builds require you to create something with minimal guidance outside of the documentation. Completing an Advanced Build earns full credit in place of doing the base assignment notebook questions/activities.
+- 🚧 **Advanced Builds (optional)** – Take on a challenge! These builds require you to create something with minimal guidance outside of the documentation. Completing an Advanced Build earns full credit in place of doing the base assignment notebook questions/activities.
 
-## 📋 Main Assignment
+### Main Assignment
 
-In the following assignment, you are required to take the app that you created for the AIE8 challenge (from [this repository](https://github.com/AI-Maker-Space/The-AI-Engineer-Challenge)) and conduct what is known, colloquially, as a "vibe check" on the application.
+In the following assignment, you are required to take the app that you created for the AIE8 challenge (from [this repository](https://github.com/AI-Maker-Space/The-AI-Engineer-Challenge)) and conduct what is known, colloquially, as a "vibe check" on the application. 
 
 You will be required to submit a link to your GitHub, as well as screenshots of the completed "vibe checks" through the provided Google Form!
 
-> **📝 NOTE:** This will require you to make updates to your personal class repository. Instructions on that process can be found [here](https://github.com/AI-Maker-Space/AIE8/tree/main/00_Setting%20Up%20Git)!
+> NOTE: This will require you to make updates to your personal class repository, instructions on that process can be found [here](https://github.com/AI-Maker-Space/AIE8/tree/main/00_Setting%20Up%20Git)!
 
 
-### 🏗️ Activity #1: Vibe Check Evaluation
+#### 🏗️ Activity #1:
 
 Please evaluate your system on the following questions:
 
@@ -92,12 +90,6 @@ This prompt specifically evaluates the AI's ability to:
 - **Identify Tone:** Recognize the stylistic elements of the source text (informal, personified, and highly descriptive).
 - **Modify Vocabulary and Syntax:** Systematically replace colloquial language, slang, and figurative expressions with more formal, neutral, and professional equivalents (e.g., "jazz-step walk" becomes "uneven gait").
 - **Preserve Core Meaning:** Rewrite the paragraph to fit the new stylistic constraint while accurately retaining the original information and sequence of events.
-
-
-
-
-
-
 
 
 
@@ -175,15 +167,11 @@ Follow these steps to prepare and submit your homework:
 > **📝 NOTE:** You should not merge the new document into origin's main branch. This will spare you from update challenges for each future session.
 
 When submitting your homework, provide the GitHub URL to the tracking branch (for example: `s01-assignment`) you created on your AIE8 repo.
-
-### The Advanced Build
-
-1. **Follow all of the steps** (Steps 1 - 8) of the Main Assignment above
-
-2. **Document what you changed** and the results you saw in the `Adjustments Made:` and `Results:` sections of the Advanced Build's Assignment #1
-
-3. **Add, commit and push** your additional modifications to this `README.md` file to your origin repository
+### The Advanced Build:
+1. Follow all of the steps (Steps 1 - 8) of the Main Assignment above
+2. Document what you changed and the results you saw in the `Adjustments Made:` and `Results:` sections of the Advanced Build's Assignment #1
+3. Add, commit and push your additional modifications to this `README.md` file to your origin repository.. **Add, commit and push** your additional modifications to this `README.md` file to your origin repository
 
 When submitting your homework, provide the following on the form:
-- The GitHub URL to the tracking branch (for example: `s01-assignment`) you created on your AIE8 repo
-- The public Vercel URL to your updated Challenge project on your AIE8 repo
++ The GitHub URL to the tracking branch (for example: `s01-assignment`) you created on your AIE8 repo.
++ The public Vercel URL to your updated Challenge project on your AIE8 repo.
