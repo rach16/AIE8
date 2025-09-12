@@ -1,0 +1,11 @@
+[project]
+name = "aie8"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jupyter>=1.1.1",
+    "openai>=1.107.1",
+    "python-dotenv>=1.1.1",
+]
