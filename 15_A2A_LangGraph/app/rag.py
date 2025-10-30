@@ -24,6 +24,7 @@ from langchain_openai import ChatOpenAI
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langgraph.graph import START, StateGraph
 from typing_extensions import TypedDict
+import logging
 
 
 def _tiktoken_len(text: str) -> int:
@@ -90,6 +91,16 @@ def _build_rag_graph(data_dir: str):
 
     def retrieve(state: _RAGState) -> _RAGState:
         retrieved_docs = retriever.invoke(state["question"]) if retriever else []
+        # Optional debug logging to confirm sources
+        if os.getenv("RAG_DEBUG", "false").lower() in {"1", "true", "yes"}:
+            logger = logging.getLogger(__name__)
+            logger.info("RAG retrieved %d chunks", len(retrieved_docs))
+            for i, d in enumerate(retrieved_docs[:5]):
+                meta = getattr(d, "metadata", {}) or {}
+                src = meta.get("source") or meta.get("file_path") or "<unknown>"
+                page = meta.get("page", meta.get("page_number"))
+                snippet = (d.page_content or "").strip().replace("\n", " ")[:200]
+                logger.info("Chunk %d: source=%s page=%s snippet=%s", i + 1, src, page, snippet)
         return {"context": retrieved_docs}  # type: ignore
 
     def generate(state: _RAGState) -> _RAGState:

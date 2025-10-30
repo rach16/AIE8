@@ -28,7 +28,7 @@ async def main() -> None:
     base_url = 'http://localhost:10000'
 
     # Increase timeout for LLM responses (default is 5 seconds, which is too short)
-    async with httpx.AsyncClient(timeout=httpx.Timeout(60.0)) as httpx_client:
+    async with httpx.AsyncClient(timeout=httpx.Timeout(120.0)) as httpx_client:
         # Initialize A2ACardResolver
         resolver = A2ACardResolver(
             httpx_client=httpx_client,
@@ -116,7 +116,15 @@ async def main() -> None:
             'message': {
                 'role': 'user',
                 'parts': [
-                    {'kind': 'text', 'text': 'What are the latest developments in artificial intelligence that you know about in 2025?'}
+                    {
+                        'kind': 'text',
+                        'text': (
+                            'Using the document retrieval tool and ONLY the Dungeons & Dragons 5e rules PDF '
+                            'in my data folder, list the steps of making an attack and the conditions '
+                            'that affect it IN DnD 5e. If the information is not in the PDF, respond with '
+                            '"I don\'t know".'
+                        ),
+                    }
                 ],
                 'message_id': uuid4().hex,
             },
@@ -128,6 +136,9 @@ async def main() -> None:
         response = await client.send_message(request)
         print(response.model_dump(mode='json', exclude_none=True))
         # --8<-- [end:send_message]
+
+        # Exit after first message to keep the run RAG-only.
+        return
 
         # --8<-- [start:Multiturn]
         send_message_payload_multiturn: dict[str, Any] = {

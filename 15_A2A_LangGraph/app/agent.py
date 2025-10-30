@@ -64,10 +64,16 @@ class Agent:
                 and message.tool_calls
                 and len(message.tool_calls) > 0
             ):
+                # Emit tool-call names for observability
+                try:
+                    tool_names = [tc.get('name') or tc.get('function', {}).get('name') for tc in message.tool_calls]
+                except Exception:
+                    tool_names = []
+                names_str = ", ".join([n for n in tool_names if n]) or "<unknown>"
                 yield {
                     'is_task_complete': False,
                     'require_user_input': False,
-                    'content': 'Searching for information...',
+                    'content': f'Searching for information... [tools: {names_str}]',
                 }
             elif isinstance(message, ToolMessage):
                 yield {
