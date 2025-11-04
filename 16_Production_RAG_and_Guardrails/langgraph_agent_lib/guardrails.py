@@ -8,21 +8,34 @@ import logging
 from typing import Dict, Any, Optional, List
 from typing_extensions import TypedDict, Annotated
 
-from guardrails.hub import (
-    RestrictToTopic,
-    DetectJailbreak,
-    CompetitorCheck,
-    LlmRagEvaluator,
-    HallucinationPrompt,
-    ProfanityFree,
-    GuardrailsPII
-)
+# Set up logging first
+logger = logging.getLogger(__name__)
+
+# Import hub guards conditionally - they may not all be installed
+try:
+    from guardrails.hub import (
+        RestrictToTopic,
+        DetectJailbreak,
+        CompetitorCheck,
+        LlmRagEvaluator,
+        HallucinationPrompt,
+        ProfanityFree,
+        GuardrailsPII
+    )
+except ImportError as e:
+    # If hub guards fail to import, set them to None
+    logger.warning(f"Failed to import some guardrails hub guards: {e}")
+    RestrictToTopic = None
+    DetectJailbreak = None
+    CompetitorCheck = None
+    LlmRagEvaluator = None
+    HallucinationPrompt = None
+    ProfanityFree = None
+    GuardrailsPII = None
+
 from guardrails import Guard
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langgraph.graph.message import add_messages
-
-# Set up logging
-logger = logging.getLogger(__name__)
 
 
 class GuardrailsState(TypedDict):
@@ -66,7 +79,7 @@ def create_guardrails_guard(
     
     try:
         # Topic restriction
-        if valid_topics or invalid_topics:
+        if (valid_topics or invalid_topics) and RestrictToTopic is not None:
             guard = guard.use(
                 RestrictToTopic(
                     valid_topics=valid_topics or [],
@@ -77,14 +90,18 @@ def create_guardrails_guard(
                 )
             )
             logger.debug("Topic restriction guard configured")
+        elif valid_topics or invalid_topics:
+            logger.warning("RestrictToTopic guard not available - topic restriction disabled")
         
         # Jailbreak detection
-        if enable_jailbreak_detection:
+        if enable_jailbreak_detection and DetectJailbreak is not None:
             guard = guard.use(DetectJailbreak())
             logger.debug("Jailbreak detection guard configured")
+        elif enable_jailbreak_detection:
+            logger.warning("DetectJailbreak guard not available - jailbreak detection disabled")
         
         # PII protection
-        if enable_pii_protection:
+        if enable_pii_protection and GuardrailsPII is not None:
             default_entities = ["CREDIT_CARD", "SSN", "PHONE_NUMBER", "EMAIL_ADDRESS"]
             entities = pii_entities or default_entities
             guard = guard.use(
@@ -94,9 +111,11 @@ def create_guardrails_guard(
                 )
             )
             logger.debug(f"PII protection guard configured for entities: {entities}")
+        elif enable_pii_protection:
+            logger.warning("GuardrailsPII guard not available - PII protection disabled")
         
         # Profanity check
-        if enable_profanity_check:
+        if enable_profanity_check and ProfanityFree is not None:
             guard = guard.use(
                 ProfanityFree(
                     threshold=0.8,
@@ -105,11 +124,15 @@ def create_guardrails_guard(
                 )
             )
             logger.debug("Profanity check guard configured")
+        elif enable_profanity_check:
+            logger.warning("ProfanityFree guard not available - profanity check disabled")
         
         # Competitor check (optional)
-        if enable_competitor_check:
+        if enable_competitor_check and CompetitorCheck is not None:
             guard = guard.use(CompetitorCheck())
             logger.debug("Competitor check guard configured")
+        elif enable_competitor_check:
+            logger.warning("CompetitorCheck guard not available - competitor check disabled")
         
         logger.info("Guardrails guard configured successfully")
         return guard
@@ -135,6 +158,9 @@ def create_factuality_guard(
     Raises:
         RuntimeError: If guard configuration fails.
     """
+    if LlmRagEvaluator is None or HallucinationPrompt is None:
+        raise RuntimeError("LlmRagEvaluator and HallucinationPrompt guards are required for factuality checking but are not available")
+    
     try:
         guard = Guard().use(
             LlmRagEvaluator(
@@ -194,7 +220,16 @@ def validate_input(
     except RuntimeError:
         raise
     except Exception as e:
-        logger.error(f"Input validation error: {e}", exc_info=True)
+        # For expected validation failures (ValidationError), don't log at all
+        from guardrails.errors import ValidationError
+        if isinstance(e, ValidationError):
+            # Expected validation failure - handle silently
+            if not raise_on_failure:
+                logger.debug(f"Input validation failed (expected): {str(e)[:100]}")
+        else:
+            # Unexpected error - log with full traceback
+            logger.error(f"Input validation error: {e}", exc_info=True)
+        
         if raise_on_failure:
             raise RuntimeError(f"Input validation failed: {e}") from e
         return {
@@ -248,7 +283,16 @@ def validate_output(
     except RuntimeError:
         raise
     except Exception as e:
-        logger.error(f"Output validation error: {e}", exc_info=True)
+        # For expected validation failures (ValidationError), don't log at all
+        from guardrails.errors import ValidationError
+        if isinstance(e, ValidationError):
+            # Expected validation failure - handle silently
+            if not raise_on_failure:
+                logger.debug(f"Output validation failed (expected): {str(e)[:100]}")
+        else:
+            # Unexpected error - log with full traceback
+            logger.error(f"Output validation error: {e}", exc_info=True)
+        
         if raise_on_failure:
             raise RuntimeError(f"Output validation failed: {e}") from e
         return {
