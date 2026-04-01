@@ -37,15 +37,54 @@ You will be required to submit a link to your GitHub, as well as screenshots of 
 Please evaluate your system on the following questions:
 
 1. Explain the concept of object-oriented programming in simple terms to a complete beginner. 
-    - Aspect Tested:
+
+**Aspect Tested:** Ability to explain a complex technical concept in simple, accessible terms.
+
+This prompt specifically evaluates the AI's skill in:
+
+- **Simplification:** Breaking down a specialized topic like Object-Oriented Programming into an easy-to-understand format for a non-expert.
+- **Use of Analogy:** Creating a relatable comparison (the LEGOs) to make an abstract concept more concrete and intuitive.
+- **Structured Teaching:** Organizing the information logically (defining objects, classes, properties, and methods) to effectively build understanding for a beginner.
 2. Read the following paragraph and provide a concise summary of the key points…
-    - Aspect Tested:
+
+**Aspect Tested:** Reading Comprehension and Summarization.
+
+This task specifically evaluates the AI's ability to:
+
+- **Identify Key Information:** Process a given paragraph and determine its central argument and most important points.
+- **Condense Information:** Distill the core message of the text into a much shorter, more concise format.
+- **Preserve Meaning:** Create a summary that accurately reflects the main idea and tone of the original source without introducing new information.
 3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
-    - Aspect Tested:
+
+**Aspect Tested:** Creative Writing and Narrative Generation.
+
+This prompt specifically evaluates the AI's ability to:
+
+- **Generate Original Content:** Create a unique story with characters, a setting, and a simple plot arc.
+- **Follow Thematic Constraints:** Weave specific required elements (a robot, friendship, an unexpected place) into a coherent narrative.
+- **Adhere to Structural Rules:** Write within a specified word count while still telling a complete story.
+- **Demonstrate Imagination:** Develop characters with simple motivations and create a scenario with a touch of emotional resonance.
 4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
-    - Aspect Tested:
+
+**Aspect Tested:** Logical and Mathematical Reasoning.
+
+This type of prompt specifically evaluates the AI's ability to:
+
+- **Parse a Word Problem:** It must understand a question written in natural language and extract the important numbers and the goal.
+- **Identify the Correct Operation:** It needs to determine that division is the required step to solve the problem for each type of fruit.
+- **Perform Accurate Calculations:** It must correctly compute both 12 / 4 and 9 / 3.
+- **Formulate a Clear Answer:** The AI has to present the solution in a simple, direct way that answers the original question.
 5. Rewrite the following paragraph in a professional, formal tone…
-    - Aspect Tested:
+
+**Aspect Tested:** Tone and Style Manipulation.
+
+This prompt specifically evaluates the AI's ability to:
+
+- **Identify Tone:** Recognize the stylistic elements of the source text (informal, personified, and highly descriptive).
+- **Modify Vocabulary and Syntax:** Systematically replace colloquial language, slang, and figurative expressions with more formal, neutral, and professional equivalents (e.g., "jazz-step walk" becomes "uneven gait").
+- **Preserve Core Meaning:** Rewrite the paragraph to fit the new stylistic constraint while accurately retaining the original information and sequence of events.
+
+
 
 This "vibe check" now serves as a baseline, of sorts, to help understand what holes your application has.
 
@@ -58,7 +97,16 @@ This "vibe check" now serves as a baseline, of sorts, to help understand what ho
 #### ❓Question #1:
 
 What are some limitations of vibe checking as an evaluation tool?
-##### ✅ Answer:
+
+**✅ Answer:**
+
+Vibe checking is a useful first step, but it has several significant limitations as a formal evaluation tool because it is inherently unstructured, subjective, and non-comprehensive.
+
+**Subjectivity and Lack of Reproducibility**
+
+A "vibe check" is based on the personal impression of the evaluator. What one person considers a "good vibe" or a successful response, another might see as a failure. This makes the results highly subjective and difficult to reproduce consistently.
+
+For example, if a bot gives a slightly quirky, creative answer to a factual question, one evaluator might find it charming and innovative, while another might judge it as an unhelpful failure to be direct. Because different people ask different questions and have different standards, you can't reliably compare a vibe check done today to one done next week, or a check done by two different team members.
 
 ### 🚧 Advanced Build (OPTIONAL):
 
@@ -68,14 +116,13 @@ Please make adjustments to your application that you believe will improve the vi
 
 #### 🏗️ Activity #1
 ##### Adjustments Made:
-- _describe adjustment(s) here_
+- Added AI Assitant chatbot to refine test cases 
 
 ##### Results:
-1. _Comment here how the change(s) impacted the vibe check of your system_
-2. 
-3. 
-4. 
-5.
+1. User can refine the test cases provided using the AI assistant chatbot
+Structured markdown formatting - All chatbot responses now use proper markdown with headings, bullet points, and organized sections
+2. Post-processing logic - Automatic formatting enhancement when the LLM doesn't follow markdown structure perfectly
+3. Context-aware refinement - The chatbot can analyze uploaded PRD documents and provide specific suggestions for improving test cases
 
 
 ## Submitting Your Homework
